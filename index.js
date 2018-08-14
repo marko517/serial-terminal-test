@@ -2,8 +2,6 @@ var express = require('express');
 var app = express();
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
-
-const ws = require("nodejs-websocket")
 var SerialPort = require('serialport');
 
 app.use(express.static('public'));
@@ -29,6 +27,13 @@ io.on('connection', function(socket){
 setInterval( function(){
     SerialPort.list(function (errors, ports){
         console.log("Begin Ports\n");
-        io.emit('text', "Sending Ports\n");
+        var arr = [];
+        ports.forEach(element => {
+            arr.push(element.comName);
+            // io.emit('text', element.comName);
+            // console.log(element.comName);
+        });
+        io.emit('ports', arr);
+        console.log(arr);
     });
 }, 5000);
