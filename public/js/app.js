@@ -9,11 +9,15 @@ app.service('SocketService', ['socketFactory', function SocketService(socketFact
 app.controller('homeController', function($scope, localStorageService, SocketService) {
 
     $scope.array = [];
+    $scope.messages = ["asd", "dddd"];
 
     $scope.connect = function() {
         // TODO: Add Connect Functionality
     }
 
+    $scope.addMassage = function(){
+        $scope.messages.push($scope.description);
+    }
     SocketService.on('ports', function(arr){
         console.log(arr);
         $scope.array = [];

@@ -1,0 +1,66 @@
+<div ng-controller="homeController">
+    <md-card>
+        <md-card-content>
+            <div layout="row">
+                <div flex>
+                    <center>
+                        <md-input-container>
+                            <label>Available Ports</label>
+                            <md-select ng-model="ctrl.userState">
+                                <!-- ?? -->
+                                <md-option>None</md-option>
+
+                                <md-option>option1</md-option>
+
+                                <md-option>option2</md-option>
+
+                                <md-option>option3</md-option>
+                                <!-- ?? -->
+                    </center>
+                    </md-select>
+                    </md-input-container>
+                </div>
+                <div flex>
+                    <center>
+                        <md-button class="md-accent md-raised">Connect</md-button>
+                    </center>
+                </div>
+            </div>
+
+
+            <md-toolbar md-scroll-shrink>
+                <div class="md-toolbar-tools">My Messages</div>
+            </md-toolbar>
+
+            <section>
+                <md-list layout="column" layout-padding>
+                    <md-list-item class="line" ng-repeat="message in messages">
+                        <div class="md-list-item-text">
+                                {{message}}
+                        </div>
+                    </md-list-item>
+                </md-list>
+            </section>
+
+            <form name="projectForm">
+
+                <md-input-container class="md-block">
+                    <label>Description</label>
+                    <input md-maxlength="255" md-no-asterisk name="description" ng-model="description">
+                    <div ng-messages="projectForm.description.$error">
+                        <!-- <div ng-message="required">This is required.</div> -->
+                        <div ng-message="md-maxlength">The description must be less than 255 characters long.</div>
+                    </div>
+                </md-input-container>
+
+                </md-input-container>
+                <div>
+                    <md-button ng-click="addMassage()" type="submit">Submit</md-button>
+                </div>
+            </form>
+
+</div>
+
+</md-card-content>
+</md-card>
+</md-content>
