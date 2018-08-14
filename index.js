@@ -6,6 +6,7 @@ var SerialPort = require('serialport');
 
 app.use(express.static('public'));
 app.use('/', express.static('public'));
+app.use('/lib', express.static('public/bower_components'));
 
 http.listen(3000, function(){
     console.log('App listening on port 3000');
@@ -13,6 +14,7 @@ http.listen(3000, function(){
 
 io.on('connection', function(socket){
     console.log("New Connection");
+    sendPorts();
 
     socket.on('disconnect', function(){
         console.log('Connection closed');
@@ -24,16 +26,16 @@ io.on('connection', function(socket){
     })
 });
 
-setInterval( function(){
+function sendPorts(){
     SerialPort.list(function (errors, ports){
         console.log("Begin Ports\n");
         var arr = [];
         ports.forEach(element => {
-            arr.push(element.comName);
-            // io.emit('text', element.comName);
-            // console.log(element.comName);
+            arr.push(element);
         });
         io.emit('ports', arr);
         console.log(arr);
     });
-}, 5000);
+}
+
+setInterval( sendPorts, 5000);
