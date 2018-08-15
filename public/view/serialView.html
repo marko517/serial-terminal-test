@@ -21,11 +21,40 @@
                 </div>
             </div>
 
+            <section>
+                <md-toolbar md-scroll-shrink>
+                    <div class="md-toolbar-tools">My Messages</div>
+                </md-toolbar>
+            </section>
 
-            <md-toolbar md-scroll-shrink>
-                <div class="md-toolbar-tools">My Messages</div>
-            </md-toolbar>
+            <section>
+                <md-content>
+                    <br>
+                    <md-toolbar class="md-hue-2">
+                        <button class="md-icon-button md-button md-ink-ripple" type="button" ng-transclude="" aria-label="View Source" ng-class="{ active: demoCtrl.$showSource }"
+                            ng-click="demoCtrl.$showSource = !demoCtrl.$showSource" style="">
 
+                            <span>Settings</span>
+
+                            <div class="md-ripple-container"> </div>
+                        </button>
+                        <div class="md-toolbar-tools">
+                            <md-button class="md-icon-button" aria-label="Settings" ng-disabled="false">
+                                <md-icon md-svg-icon="img/icons/menu.svg"></md-icon>
+                            </md-button>
+                        </div>
+                    </md-toolbar>
+                    <br>
+                    <md-tabs class="demo-source-tabs md-primary ng-isolate-scope" ng-show="demoCtrl.$showSource" style="min-height: 0px;" aria-hidden="false">
+                        <md-tabs-wrapper>
+                            <md-tab-data>
+                            </md-tab-data>
+                            </md-tabs-canvas>
+                        </md-tabs-wrapper>
+                        <md-tabs-content-wrapper ng-show="$mdTabsCtrl.hasContent &amp;&amp; $mdTabsCtrl.selectedIndex >= 0" class="_md" aria-hidden="false">
+                        </md-tabs-content-wrapper>
+                    </md-tabs>
+            </section>
             <section id="messagesSection" style="max-height: 150px; overflow-y: scroll;">
                 <md-list layout="column" layout-padding>
                     <md-list-item class="line" ng-repeat="message in messages">
