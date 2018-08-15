@@ -1,23 +1,20 @@
 <div ng-controller="homeController">
     <md-input-container>
-        <!-- <label>Chosen Port</label> -->
-        <md-form-field>
-            <md-select ng-model="array">
-                <md-option ng-repeat="item in array" ng-value="{{item.name}}">
-                    {{item.name}}
+        <md-select ng-model="selectedPort" md-on-open="getPorts()">
+            <md-option ng-repeat="item in array" ng-value="{{item.comName}}">
+                    {{item.comName + " " + item.manufacturer}}
                 </md-option>
-            </md-select>
-        </md-form-field>
+        </md-select>
     </md-input-container>
     <md-button ng-click="connect()" class="md-warn">Connect</md-button>
 
     <md-content>
-        <md-list flex>
+        <md-list style="max-height: 300px; overflow: hidden;">
             <md-subheader class="md-no-sticky">Available Ports</md-subheader>
             <md-list-item class="md-3-line" ng-repeat="item in array" ng-click="null">
 
                 <div class="md-list-item-text" layout="column">
-                    <h3>{{ item.name }}</h3>
+                    <h3>{{ item.comName }}</h3>
                     <h3>{{ item.manufacturer }}</h3>
 
                 </div>

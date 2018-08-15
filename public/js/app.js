@@ -6,24 +6,26 @@ app.service('SocketService', ['socketFactory', function SocketService(socketFact
     });
 }]);
 
-app.controller('homeController', function($scope, localStorageService, SocketService) {
+app.controller('homeController', function ($scope, localStorageService, SocketService) {
 
     $scope.array = [];
+    $scope.selectedPort;
     $scope.messages = ["asd", "dddd"];
 
-    $scope.connect = function() {
+    $scope.connect = function () {
         // TODO: Add Connect Functionality
     }
 
-    $scope.addMessage = function(){
+    $scope.getPorts = function () {
+        SocketService.emit('getPorts');
+    }
+
+    $scope.addMessage = function () {
         $scope.messages.push($scope.description);
     }
-    SocketService.on('ports', function(arr){
-        console.log(arr);
-        $scope.array = [];
-        arr.forEach(element => {
-            $scope.array.push({ name: element.comName, manufacturer: element.manufacturer});
-        });
+
+    SocketService.on('ports', function (portList) {
+        $scope.array = portList;
     })
 
 })

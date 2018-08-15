@@ -14,10 +14,15 @@ http.listen(3000, function(){
 
 io.on('connection', function(socket){
     console.log("New Connection");
-    sendPorts();
+    sendPorts(socket);
 
     socket.on('disconnect', function(){
         console.log('Connection closed');
+    });
+
+    socket.on('getPorts', function(){
+        console.log("Sending Ports");
+        sendPorts(socket);
     });
 
     socket.on('text', function(str){
@@ -26,16 +31,17 @@ io.on('connection', function(socket){
     })
 });
 
-function sendPorts(){
+function sendPorts(socket){
     SerialPort.list(function (errors, ports){
         console.log("Begin Ports\n");
-        var arr = [];
-        ports.forEach(element => {
-            arr.push(element);
-        });
-        io.emit('ports', arr);
-        console.log(arr);
+        if(socket == null)
+        {
+            io.emit('ports', ports);
+        }
+        else
+        {
+            socket.emit('ports', ports);
+        }
+        console.log(ports);
     });
 }
-
-setInterval( sendPorts, 5000);
