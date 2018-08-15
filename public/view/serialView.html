@@ -4,15 +4,16 @@
             <div layout="row">
                 <div flex>
                     <center>
-                            <!-- <div ng-controller="SelectAsyncController" -->
-                            <!-- layout="column" layout-align="center center" style="padding:40px" ng-cloak> -->
-                            <p>Select can call an arbitrary function on show. If this function returns a promise, it will display a loading indicator while it is being resolved:</p>
-                            <div layout="column" layout-align="center center">
-                              <md-select placeholder="Assign to user" ng-model="selectedProt" md-on-open="getPorts()" style="min-width: 200px;">
+                        <!-- <div ng-controller="SelectAsyncController" -->
+                        <!-- layout="column" layout-align="center center" style="padding:40px" ng-cloak> -->
+                        <p>Select can call an arbitrary function on show. If this function returns a promise, it will display
+                            a loading indicator while it is being resolved:</p>
+                        <div layout="column" layout-align="center center">
+                            <md-select placeholder="Assign to user" ng-model="selectedProt" md-on-open="getPorts()" style="min-width: 200px;">
                                 <md-option ng-value="item.comName" ng-repeat="item in array">{{item.comName + " " + item.manufacturer}}</md-option>
-                              </md-select>
-                              <p class="md-caption">You have assigned the task to: {{ item ? item.comName : 'No one yet' }}</p>
-                            </div>
+                            </md-select>
+                            <p class="md-caption">You have assigned the task to: {{ item ? item.comName : 'No one yet' }}</p>
+                        </div>
                         <!-- <md-input-container>
                             <label>Available Ports</label>
                             <md-select ng-model="selectedPort" md-on-open="getPorts()">
@@ -33,37 +34,20 @@
             <section>
                 <md-toolbar md-scroll-shrink>
                     <div class="md-toolbar-tools">My Messages</div>
+                    <button class="md-icon-button md-button md-ink-ripple" type="button" ng-transclude="" aria-label="View Source" ng-class="{ active: demoCtrl.$showSource }"
+                    ng-click="demoCtrl.$showSource = !demoCtrl.$showSource" style="">
+
+                    <span>Settings</span>
+
+                    <div class="md-ripple-container"> </div>
+                </button>
+                <md-content class="demo-source-tabs md-primary ng-isolate-scope" ng-show="demoCtrl.$showSource" style="min-height: 0px;"
+                    aria-hidden="false">
+                    <h2>add element</h2>
+                </md-content>
                 </md-toolbar>
             </section>
 
-            <section>
-                <md-content>
-                    <br>
-                    <md-toolbar class="md-hue-2">
-                        <button class="md-icon-button md-button md-ink-ripple" type="button" ng-transclude="" aria-label="View Source" ng-class="{ active: demoCtrl.$showSource }"
-                            ng-click="demoCtrl.$showSource = !demoCtrl.$showSource" style="">
-
-                            <span>Settings</span>
-
-                            <div class="md-ripple-container"> </div>
-                        </button>
-                        <div class="md-toolbar-tools">
-                            <md-button class="md-icon-button" aria-label="Settings" ng-disabled="false">
-                                <md-icon md-svg-icon="img/icons/menu.svg"></md-icon>
-                            </md-button>
-                        </div>
-                    </md-toolbar>
-                    <br>
-                    <md-tabs class="demo-source-tabs md-primary ng-isolate-scope" ng-show="demoCtrl.$showSource" style="min-height: 0px;" aria-hidden="false">
-                        <md-tabs-wrapper>
-                            <md-tab-data>
-                            </md-tab-data>
-                            </md-tabs-canvas>
-                        </md-tabs-wrapper>
-                        <md-tabs-content-wrapper ng-show="$mdTabsCtrl.hasContent &amp;&amp; $mdTabsCtrl.selectedIndex >= 0" class="_md" aria-hidden="false">
-                        </md-tabs-content-wrapper>
-                    </md-tabs>
-            </section>
             <section id="messagesSection" style="max-height: 150px; overflow-y: scroll;">
                 <md-list layout="column" layout-padding>
                     <md-list-item class="line" ng-repeat="message in messages">
