@@ -1,0 +1,24 @@
+.btn1 {
+    color : rgb(49, 46, 46);
+    background-color: rgba(255, 222, 121, 0.96);
+    border-radius: 10px;
+    font-size: 16px;
+  }
+  
+  .btn1:not([disabled]):hover {
+    background-color: rgba(107, 103, 91, 0.96);
+    color: white;
+  }
+  
+  .btn1[disabled] {
+    color : rgb(187, 187, 187);
+    background-color: rgba(230, 230, 229, 0.96);
+  }
+
+  .toolbardemoBasicUsage md-toolbar .md-button.md-icon-button .favorite-icon {
+    fill: #DE3641; }
+  
+  .toolbardemoBasicUsage md-toolbar md-toolbar-filler {
+    background-color: #e0e0e0; }
+    .toolbardemoBasicUsage md-toolbar md-toolbar-filler #filler-icon {
+      fill: #4C9EF1; }
