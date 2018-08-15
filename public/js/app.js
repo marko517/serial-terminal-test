@@ -15,7 +15,7 @@ app.controller('homeController', function($scope, localStorageService, SocketSer
         // TODO: Add Connect Functionality
     }
 
-    $scope.addMassage = function(){
+    $scope.addMessage = function(){
         $scope.messages.push($scope.description);
     }
     SocketService.on('ports', function(arr){
