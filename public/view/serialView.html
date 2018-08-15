@@ -34,18 +34,10 @@
             <section>
                 <md-toolbar md-scroll-shrink>
                     <div class="md-toolbar-tools">My Messages</div>
-                </md-toolbar>
-            </section>
+                    <button class="md-icon-button md-button md-ink-ripple" type="button" ng-transclude="" aria-label="View Source" ng-class="{ active: demoCtrl.$showSource }"
+                    ng-click="demoCtrl.$showSource = !demoCtrl.$showSource" style="">
 
-            <section>
-                <md-content>
-                    <br>
-                    <md-toolbar class="md-hue-2">
-                        <button class="md-icon-button md-button md-ink-ripple" type="button" ng-transclude="" aria-label="View Source" ng-class="{ active: demoCtrl.$showSource }"
-                            ng-click="demoCtrl.$showSource = !demoCtrl.$showSource" style="">
-
-                            <span>Settings</span>
-
+                    <span>Settings</span>
                             <div class="md-ripple-container"> </div>
                         </button>
                         <div class="md-toolbar-tools">
@@ -119,7 +111,17 @@
                         <md-tabs-content-wrapper ng-show="$mdTabsCtrl.hasContent &amp;&amp; $mdTabsCtrl.selectedIndex >= 0" class="_md" aria-hidden="false">
                         </md-tabs-content-wrapper>
                     </md-tabs>
+
+
+                    <div class="md-ripple-container"> </div>
+                </button>
+                <md-content class="demo-source-tabs md-primary ng-isolate-scope" ng-show="demoCtrl.$showSource" style="min-height: 0px;"
+                    aria-hidden="false">
+                    <h2>add element</h2>
+                </md-content>
+                </md-toolbar>
             </section>
+
             <section id="messagesSection" style="max-height: 150px; overflow-y: scroll;">
                 <md-list layout="column" layout-padding>
                     <md-list-item class="line" ng-repeat="message in messages">
