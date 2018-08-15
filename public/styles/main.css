@@ -14,11 +14,12 @@
     color : rgb(187, 187, 187);
     background-color: rgba(230, 230, 229, 0.96);
   }
-
-  .toolbardemoBasicUsage md-toolbar .md-button.md-icon-button .favorite-icon {
-    fill: #DE3641; }
-  
-  .toolbardemoBasicUsage md-toolbar md-toolbar-filler {
-    background-color: #e0e0e0; }
-    .toolbardemoBasicUsage md-toolbar md-toolbar-filler #filler-icon {
-      fill: rgb(40, 250, 92); }
+      .md-button.md-icon-button {
+        margin: 0 0.6rem;
+        height: 4.8rem;
+        min-width: 0;
+        line-height: 4.8rem;
+        padding-left: 0;
+        padding-right: 0;
+        width: 4.8rem;
+    }
