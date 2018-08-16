@@ -35,7 +35,12 @@ io.on('connection', function (socket) {
         socket.emit('text', str);
     });
 
-    socket.on('comConnect', comConnect(comObj));
+    socket.on('comConnect', function (comObj) {
+        console.log(comObj);
+        if(comObj!= undefined){
+            console.log(comObj);
+        }
+    });
 
     socket.on('comDisconnect', function () {
         console.log("COM Disconnect");
