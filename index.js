@@ -38,7 +38,8 @@ io.on('connection', function (socket) {
     socket.on('comConnect', function (comObj) {
         console.log(comObj);
         if(comObj!= undefined){
-            console.log(comObj);
+            comConnect(comObj, socket);
+
         }
     });
 
@@ -54,7 +55,7 @@ io.on('connection', function (socket) {
     })
 });
 
-function comConnect(comObj) {
+function comConnect(comObj, socket) {
     if(comObj == undefined){
         consle.log("Non existant port");
     }
@@ -64,6 +65,7 @@ function comConnect(comObj) {
         SerialConnection = new SerialPort(comObj.comName, comObj);
         parser = SerialConnection.pipe(new Readline({ delimiter: '\r\n' }))
         parser.on('data', SerialDataCallback);
+        //console.log("im here");
         connectedSocket = socket;
         socket.emit('comConnectAccept');
         console.log("Serial Connection Established On: " + comObj.comName);
