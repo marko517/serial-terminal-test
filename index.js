@@ -49,6 +49,10 @@ io.on('connection', function (socket) {
 });
 
 function comConnect(comObj) {
+    if(comObj == undefined){
+        consle.log("Non existant port");
+    }
+    else{
     console.log("COM Connect " + comObj.comName);
     if (SerialConnection == null) {
         SerialConnection = new SerialPort(comObj.comName, comObj);
@@ -61,6 +65,7 @@ function comConnect(comObj) {
     else {
         console.log("Serial Connection Already Established On Other Port");
         socket.emit('comConnectRefuse');
+    }
     }
 }
 

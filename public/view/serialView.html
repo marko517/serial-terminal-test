@@ -6,8 +6,8 @@
                     <center>
                         <!-- <div ng-controller="SelectAsyncController" -->
                         <!-- layout="column" layout-align="center center" style="padding:40px" ng-cloak> -->
-                        <p>Select can call an arbitrary function on show. If this function returns a promise, it will display
-                            a loading indicator while it is being resolved:</p>
+                        <!-- <p>Select can call an arbitrary function on show. If this function returns a promise, it will display
+                            a loading indicator while it is being resolved:</p> -->
                         <div layout="column" layout-align="center center">
                             <md-select placeholder="Assign to user" ng-model="selectedPort" md-on-open="getPorts()" style="min-width: 200px;" ng-disabled="{{dropDownDisable}}">
                                 <md-option ng-value="item.comName" ng-repeat="item in array">{{item.comName + " " + item.manufacturer}}</md-option>
@@ -40,20 +40,19 @@
             <section>
                 <md-toolbar md-scroll-shrink>
                     <div class="md-toolbar-tools">
-                        <span>My message</span>
-                        <button class="md-button" class="md-icon-button md-button md-ink-ripple" type="button"
+                        <h7 flex md-truncate>My messages</h7>
+                        <md-button class="md-button" class="md-icon-button md-button md-ink-ripple" type="button"
                             aria-label="View Source" ng-class="{ active: demoCtrl.$showSource }" ng-click="demoCtrl.$showSource = !demoCtrl.$showSource">
 
                             <span>Settings</span>
-
-                            <div class="md-ripple-container"> </div>
-                        </button>
+                            </md-button>>
+                            <div class="md-ripple-container"> 
+                        </div>
                     </div>
                     <md-content class="demo-source-tabs md-primary ng-isolate-scope" ng-show="demoCtrl.$showSource" style="min-height: 0px;"
                         aria-hidden="false">
-                        <!--  -->
-                        <div layout="row" layout-align="space-between center">
-                            <span>Bitrate</span>
+    
+                        <div layout="row" layout-align="end center">
                             <md-select ng-model="bitrate" placeholder="bitrate" class="md-no-underline">
                                 <md-option value="110">110</md-option>
                                 <md-option value="300">300</md-option>
@@ -77,8 +76,7 @@
                         </div>
 
 
-                        <div layout="row" layout-align="space-between center">
-                            <span>Data Bit</span>
+                        <div layout="row" layout-align="end center">
                             <md-select ng-model="dataBit" placeholder="dataBit" class="md-no-underline">
                                 <md-option value="7">7</md-option>
                                 <md-option value="8">8</md-option>
@@ -86,8 +84,7 @@
                             </md-select>
                         </div>
 
-                        <div layout="row" layout-align="space-between center">
-                            <span>Parity</span>
+                        <div layout="row" layout-align="end center">
                             <md-select ng-model="Parity" placeholder="Parity" class="md-no-underline">
                                 <md-option value="none">none</md-option>
                                 <md-option value="odd">odd</md-option>
@@ -95,29 +92,26 @@
                             </md-select>
                         </div>
 
-                        <div layout="row" layout-align="space-between center">
-                            <span>Stop Bit</span>
+                        <div layout="row" layout-align="end center">
                             <md-select ng-model="StopBit" placeholder="StopBit" class="md-no-underline">
                                 <md-option value="1">1 bit</md-option>
                                 <md-option value="2">2 bit</md-option>
                             </md-select>
                         </div>
 
-                        <div layout="row" layout-align="space-between center">
-                            <span>Flow Control</span>
+                        <div layout="row" layout-align="end center">
                             <md-select ng-model="FlowControl" placeholder="FlowControl" class="md-no-underline">
                                 <md-option value="none">none</md-option>
                                 <md-option value="RTS/CTSHardware">RTS/CTS hardware</md-option>
                             </md-select>
                         </div>
-                        <!--  -->
                     </md-content>
                 </md-toolbar>
             </section>
 
             <section id="messagesSection" style="max-height: 150px; overflow-y: scroll;">
                 <md-list layout="column" layout-padding>
-                    <md-list-item class="line" ng-repeat="message in messages">
+                    <md-list-item class="line" ng-repeat="message in messages track by $index">
                         <div class="md-list-item-text">
                             {{message}}
                         </div>
@@ -131,14 +125,13 @@
                     <label>Description</label>
                     <input md-maxlength="255" md-no-asterisk name="description" ng-model="description">
                     <div ng-messages="projectForm.description.$error">
-                        <!-- <div ng-message="required">This is required.</div> -->
                         <div ng-message="md-maxlength">The description must be less than 255 characters long.</div>
                     </div>
                 </md-input-container>
 
                 </md-input-container>
                 <div>
-                    <md-button class="btn1" ng-click="addMessage()" type="submit">Submit</md-button>
+                    <md-button class="md-raised md-warn" ng-click="addMessage()" type="submit">Submit</md-button>
                 </div>
             </form>
 

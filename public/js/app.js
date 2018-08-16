@@ -10,7 +10,7 @@ app.controller('homeController', function ($scope, localStorageService, SocketSe
 
     $scope.array = [];
     $scope.selectedPort = null;
-    $scope.messages = ["asd", "dddd"];
+    $scope.messages = [];
     $scope.description;
     $scope.connectButtonText = "Connect";
     $scope.dropDownDisable = false;
