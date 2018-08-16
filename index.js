@@ -65,7 +65,6 @@ function comConnect(comObj, socket) {
         SerialConnection = new SerialPort(comObj.comName, comObj);
         parser = SerialConnection.pipe(new Readline({ delimiter: '\r\n' }))
         parser.on('data', SerialDataCallback);
-        //console.log("im here");
         connectedSocket = socket;
         socket.emit('comConnectAccept');
         console.log("Serial Connection Established On: " + comObj.comName);
