@@ -12,6 +12,7 @@ app.use('/lib', express.static('public/bower_components'));
 var SerialConnection = null;
 var connectedSocket = null;
 
+
 http.listen(3000, function () {
     console.log('App listening on port 3000');
 });
