@@ -9,10 +9,9 @@
                         <!-- <p>Select can call an arbitrary function on show. If this function returns a promise, it will display
                             a loading indicator while it is being resolved:</p> -->
                         <div layout="column" layout-align="center center">
-                            <md-select placeholder="Assign to user" ng-model="selectedPort" md-on-open="getPorts()" style="min-width: 200px;" ng-disabled="{{dropDownDisable}}">
+                            <md-select placeholder="" ng-model="selectedPort" md-on-open="getPorts()" style="min-width: 200px;" ng-disabled="{{dropDownDisable}}">
                                 <md-option ng-value="item.comName" ng-repeat="item in array">{{item.comName + " " + item.manufacturer}}</md-option>
                             </md-select>
-                            <p class="md-caption">You have assigned the task to: {{ item ? item.comName : 'No one yet' }}</p>
                         </div>
                         <!-- <md-input-container>
                             <label>Available Ports</label>
@@ -74,8 +73,7 @@
 
                             </md-select>
                         </div>
-
-
+                        
                         <div layout="row" layout-align="end center">
                             <md-select ng-model="dataBit" placeholder="dataBit" class="md-no-underline">
                                 <md-option value="7">7</md-option>
@@ -122,7 +120,7 @@
             <form name="projectForm">
 
                 <md-input-container class="md-block">
-                    <label>Description</label>
+                    <label>Message</label>
                     <input md-maxlength="255" md-no-asterisk name="description" ng-model="description">
                     <div ng-messages="projectForm.description.$error">
                         <div ng-message="md-maxlength">The description must be less than 255 characters long.</div>
