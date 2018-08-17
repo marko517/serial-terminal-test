@@ -89,10 +89,15 @@ function sendPorts(socket) {
 function SerialDataCallback(buf) {
     str = buf.toString();
     currentMessage += str;
-    if( str == "\n" )
+    str = currentMessage.split(/[\r\n]+/);
+    if( str[0] != currentMessage )
     {
-        console.log("Received: " + currentMessage);
-        connectedSocket.emit('comReceive', currentMessage);
+        console.log("Received: " + str[0]);
+        connectedSocket.emit('comReceive', str[0]);
+        str[0] = "";
         currentMessage = "";
+        str.forEach(element => {
+            currentMessage += (element + "\n");
+        });
     }
 }
