@@ -14,12 +14,15 @@ app.controller('homeController', function ($scope, localStorageService, SocketSe
     $scope.description;
     $scope.connectButtonText = "Connect";
     $scope.dropDownDisable = false;
+    $scope.submitDisable = true;
 
     $scope.bitrate = "9600";
     $scope.dataBit = "8";
     $scope.Parity = "even";
     $scope.StopBit = "1";
     errElement = document.getElementById('errParagraph');
+
+    var timeout;
 
     $scope.connectButton = function () {
         if ($scope.connectButtonText == "Connect") {
@@ -36,26 +39,36 @@ app.controller('homeController', function ($scope, localStorageService, SocketSe
 
     $scope.addMessage = function () {
         $scope.messages.push($scope.description);
+        SocketService.emit('comSend', $scope.description + "\n");
     }
+
+    SocketService.on('comReceive', function(str){
+        $scope.messages.push(str);
+    })
 
     SocketService.on('ports', function (portList) {
         $scope.array = portList;
     });
 
     SocketService.on('comConnectAccept', function () {
+        clearInterval(timeout);
         errElement.innerHTML = "Connection established";
         $scope.connectButtonText = "Disconnect";
         $scope.dropDownDisable = true;
+        $scope.submitDisable = false;
     });
 
     SocketService.on('comConnectRefuse', function () {
+        clearInterval(timeout);
         errElement.innerHTML = "Connection refused";
+        $scope.dropDownDisable = false;
     });
 
     SocketService.on('comDisconnect', function () {
         errElement.innerHTML = "Connection closed from other side";
         $scope.connectButtonText = "Connect";
         $scope.dropDownDisable = false;
+        $scope.submitDisable = true;
     });
 
     function connect() {
@@ -72,7 +85,9 @@ app.controller('homeController', function ($scope, localStorageService, SocketSe
                                 "stopBits": parseInt($scope.StopBit, 10)
                             };
                             errElement.innerHTML = "Connecting...";
+                            $scope.dropDownDisable = true;
                             SocketService.emit('comConnect', comConnection);
+                            timeout = setInterval(comConnectTimeout, 5000);
                         }
                         else {
                             errElement.innerHTML = "You have not chosen stop bits";
@@ -95,10 +110,20 @@ app.controller('homeController', function ($scope, localStorageService, SocketSe
         }
     }
 
+    function comConnectTimeout()
+    {
+        errElement.innerHTML = "Connection Timed Out";
+        $scope.connectButtonText = "Connect";
+        $scope.dropDownDisable = false;
+        $scope.submitDisable = true;
+        SocketService.emit('comDisconnect');
+    }
+
     function disconnect() {
         SocketService.emit('comDisconnect');
         errElement.innerHTML = "Connection closed";
         $scope.connectButtonText = "Connect";
         $scope.dropDownDisable = false;
+        $scope.submitDisable = true;
     }
 })

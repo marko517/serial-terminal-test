@@ -3,7 +3,6 @@ var app = express();
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
 var SerialPort = require('serialport');
-var Readline = require('@serialport/parser-readline')
 
 app.use(express.static('public'));
 app.use('/', express.static('public'));
@@ -12,6 +11,7 @@ app.use('/lib', express.static('public/bower_components'));
 var SerialConnection = null;
 var connectedSocket = null;
 
+var currentMessage = "";
 
 http.listen(3000, function () {
     console.log('App listening on port 3000');
@@ -63,8 +63,7 @@ function comConnect(comObj, socket) {
     console.log("COM Connect " + comObj.comName);
     if (SerialConnection == null) {
         SerialConnection = new SerialPort(comObj.comName, comObj);
-        parser = SerialConnection.pipe(new Readline({ delimiter: '\r\n' }))
-        parser.on('data', SerialDataCallback);
+        SerialConnection.on('data', SerialDataCallback);
         connectedSocket = socket;
         socket.emit('comConnectAccept');
         console.log("Serial Connection Established On: " + comObj.comName);
@@ -87,6 +86,13 @@ function sendPorts(socket) {
     });
 }
 
-function SerialDataCallback(str) {
-    connectedSocket.emit('comReceive', str);
+function SerialDataCallback(buf) {
+    str = buf.toString();
+    currentMessage += str;
+    if( str == "\n" )
+    {
+        console.log("Received: " + currentMessage);
+        connectedSocket.emit('comReceive', currentMessage);
+        currentMessage = "";
+    }
 }

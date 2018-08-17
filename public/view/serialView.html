@@ -9,7 +9,7 @@
                         <!-- <p>Select can call an arbitrary function on show. If this function returns a promise, it will display
                             a loading indicator while it is being resolved:</p> -->
                         <div layout="column" layout-align="center center">
-                            <md-select placeholder="" ng-model="selectedPort" md-on-open="getPorts()" style="min-width: 200px;" ng-disabled="{{dropDownDisable}}">
+                            <md-select ng-model="selectedPort" md-on-open="getPorts()" style="min-width: 200px;" ng-disabled="dropDownDisable">
                                 <md-option ng-value="item.comName" ng-repeat="item in array">{{item.comName + " " + item.manufacturer}}</md-option>
                             </md-select>
                         </div>
@@ -135,7 +135,7 @@
 
                 </md-input-container>
                 <div>
-                    <md-button class="md-raised md-warn" ng-click="addMessage()" type="submit">Submit</md-button>
+                    <md-button class="md-raised md-warn" ng-click="addMessage()" type="submit" ng-disabled="submitDisable">Submit</md-button>
                 </div>
             </form>
 
